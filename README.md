@@ -112,10 +112,6 @@ BLOOMBERG CODE: LIQ_RISK AMBER 78%
 - Federal Reserve FOMC Calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 - Bloomberg Terminal Documentation: Proprietary (simulated interface for educational purposes)
 
-## 📄 License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
 ---
 
 *Developed with ❤️ for educational purposes in Applied AI and Machine Learning*  
