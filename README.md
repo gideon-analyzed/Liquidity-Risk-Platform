@@ -2,7 +2,6 @@
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 
 A real-time liquidity risk monitoring system inspired by Bloomberg's AIMS platform. This platform analyzes market data to detect potential liquidity crises in London equities (LSE) and provides actionable RED/AMBER/GREEN alerts with trading recommendations.
 
