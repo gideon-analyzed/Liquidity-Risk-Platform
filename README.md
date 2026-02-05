@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-This platform analyzes market data to detect potential liquidity crises in London equities (LSE) and provides actionable RED/AMBER/GREEN alerts with trading recommendations.
+This platform analyses market data to detect potential liquidity crises in London equities (LSE) and provides actionable RED/AMBER/GREEN alerts with trading recommendations.
 
 ## ✨ Features
 
@@ -36,7 +36,13 @@ python liquidity_risk_tester.py
 
 ```
 liquidity-risk-intelligence/
-├── liquidity_risk_tester.py    # Main application entry point
+├── main.py                     # Main application entry point
+├── config.py                   # Configuration module for Liquidity Risk
+├── dashboard.py                # Dashboard module for liquidity metrics
+├── data_engine.py              # Module for data handling
+├── decision_engine.py          # Decision engine for liquidity risk recommendations
+├── risk_analyser.py            # Risk Analyser Module for liquidity crisis prediction
+├── utils.py                    # Utility functions for terminal management
 ├── requirements.txt            # Python dependencies
 ├── LICENSE
 └── README.md
@@ -44,7 +50,7 @@ liquidity-risk-intelligence/
 
 ## ⚙️ Configuration
 
-Edit these flags at the top of `liquidity_risk_tester.py`:
+Edit these flags in `config.py`:
 
 ```python
 TEST_MODE = True      # Set to False for real market analysis (uses simulated risk scores when True)
@@ -77,8 +83,8 @@ Real-time liquidity crisis detection system
   • Downloading FTSE 100 (^FTSE) data
   • Liquidity features created successfully!
 
-[PHASE 2] ANALYZING LIQUIDITY CONDITIONS
-  • Analyzed 1,267 trading days of liquidity data
+[PHASE 2] ANALYSING LIQUIDITY CONDITIONS
+  • Analysed 1,267 trading days of liquidity data
   • Detected 10 historical crisis events
 
 [PHASE 3] GENERATING LIQUIDITY RECOMMENDATION
