@@ -1,5 +1,5 @@
 """
-Configuration module for Bloomberg Liquidity Risk Intelligence Platform
+Configuration module for Liquidity Risk Intelligence Platform
 Contains all system-wide configuration settings and constants
 """
 
@@ -15,13 +15,13 @@ VERBOSE = True  # Set to False for cleaner output
 #   - When True: Shows detailed progress messages
 #   - When False: Only shows critical alerts
 
-# Bloomberg methodology constants
-CRISIS_THRESHOLD = 0.4  # Liquidity ratio below this indicates crisis (Bloomberg standard)
+# Methodology constants
+CRISIS_THRESHOLD = 0.4  # Liquidity ratio below this indicates crisis
 RED_THRESHOLD = 0.85    # Critical risk level requiring immediate action
 AMBER_THRESHOLD = 0.70  # Elevated risk requiring exposure reduction
-ROLLING_WINDOW_DAYS = 30  # Standard Bloomberg window for liquidity calculations
+ROLLING_WINDOW_DAYS = 30  # Standard window for liquidity calculations
 
-# Historical crisis dates (Bloomberg AIMS standard events)
+# Historical crisis dates
 CRISIS_DATES = [
     '2020-03-12', '2020-03-16', '2016-06-24', '2018-12-24', '2022-09-26',
     '2019-08-14', '2020-02-24', '2020-03-09', '2020-03-18', '2022-09-28'
