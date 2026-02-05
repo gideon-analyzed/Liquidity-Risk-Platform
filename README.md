@@ -3,17 +3,17 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-A real-time liquidity risk monitoring system inspired by Bloomberg's AIMS platform. This platform analyzes market data to detect potential liquidity crises in London equities (LSE) and provides actionable RED/AMBER/GREEN alerts with trading recommendations.
+This platform analyzes market data to detect potential liquidity crises in London equities (LSE) and provides actionable RED/AMBER/GREEN alerts with trading recommendations.
 
 ## ✨ Features
 
 - **Real-time Risk Monitoring**: Continuous analysis of liquidity ratios and volatility spikes
-- **Bloomberg-Style Alerting System**:
+- **Alerting System**:
   - 🔴 **RED** (≥85% risk): Immediate liquidation recommended
   - 🟡 **AMBER** (≥70% risk): Reduce exposure advised
   - 🟢 **GREEN** (<70% risk): Normal monitoring
 - **Multi-Asset Analysis**: Simultaneous monitoring of TESCO (TSCO.L) and BP (BP.L) liquidity
-- **Interactive Dashboard**: Real-time visualization of liquidity ratios, risk scores, and market indicators
+- **Interactive Dashboard**: Real-time visualisation of liquidity ratios, risk scores and market indicators
 - **Automated Recommendations**: Actionable trading suggestions based on risk thresholds
 - **SQL-Powered Feature Engineering**: Production-grade liquidity metrics calculated using SQL window functions
 - **Transmission Latency Analysis**: Measures market reaction time to interest rate shocks
@@ -57,14 +57,14 @@ VERBOSE = True        # Show detailed progress messages
 - **Transmission Latency**: Markets take approximately **7.75 days** (median: 6 days) to reach 50% of maximum response to interest rate shocks
 - **Volatility Impact**: Rate shocks increase volatility by an average of **+30.84%**, though correlation with shock magnitude is weak (r ≈ -0.095)
 - **Risk Thresholds**: 
-  - Liquidity ratio < 0.4 triggers crisis conditions (Bloomberg standard)
+  - Liquidity ratio < 0.4 triggers crisis conditions
   - 70/30 weighting: 70% liquidity ratio + 30% volatility change
 
 ## 📈 Sample Output
 
 ```
 ============================================================
-BLOOMBERG LIQUIDITY RISK INTELLIGENCE PLATFORM
+LIQUIDITY RISK INTELLIGENCE PLATFORM
 ============================================================
 Real-time liquidity crisis detection system
 
@@ -83,13 +83,13 @@ Real-time liquidity crisis detection system
 
 [PHASE 3] GENERATING LIQUIDITY RECOMMENDATION
 ============================================================
-BLOOMBERG LIQUIDITY ALERT - AMBER LEVEL
+LIQUIDITY ALERT - AMBER LEVEL
 ============================================================
 TIMESTAMP:    2024-01-29 14:32:17 UTC
 SECURITY:     BP.L/TSCO.L
 RISK SCORE:   78.45%
 RECOMMENDATION: REDUCE EXPOSURE | Buy put options on BP.L/TSCO.L
-BLOOMBERG CODE: LIQ_RISK AMBER 78%
+CODE: LIQ_RISK AMBER 78%
 ============================================================
 ```
 
@@ -99,7 +99,7 @@ BLOOMBERG CODE: LIQ_RISK AMBER 78%
 - **yfinance**: Real market data retrieval from Yahoo Finance
 - **SQLite3**: Embedded time-series database storage
 - **pandas & NumPy**: Financial time-series manipulation
-- **matplotlib**: Professional Bloomberg-style visualizations
+- **matplotlib**: Professional visualisations
 - **scikit-learn** *(future)*: ML model integration for crisis prediction
 
 ## ⚠️ Important Notice
