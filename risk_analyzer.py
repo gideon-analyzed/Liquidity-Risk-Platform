@@ -1,7 +1,7 @@
 """
 Risk Analyzer Module - Phase 2
 Simulates machine learning model for liquidity crisis prediction
-Implements Bloomberg's proprietary risk scoring methodology
+Implements a risk scoring methodology
 """
 
 import sqlite3
@@ -24,7 +24,7 @@ def load_features():
 
 
 def label_historical_crises(df):
-    """Label historical crisis events based on Bloomberg AIMS standard
+    """Label historical crisis events
     
     Args:
         df (pandas.DataFrame): DataFrame with date column
@@ -48,9 +48,9 @@ def label_historical_crises(df):
 
 
 def engineer_risk_features(df):
-    """Engineer Bloomberg-style risk features for model input
+    """Engineer risk features for model input
     
-    Implements Bloomberg's proprietary feature engineering:
+    Implements proprietary feature engineering:
     - Liquidity momentum (5-day)
     - Volume volatility (5-day rolling std)
     - Market volatility and momentum
@@ -74,7 +74,7 @@ def engineer_risk_features(df):
     df['ftse_vol'] = df['ftse100_close'].pct_change().rolling(5).std()
     df['ftse_momentum'] = df['ftse100_close'].pct_change(10)
     
-    # Bloomberg's proprietary "liquidity premium" metric
+    # Proprietary "liquidity premium" metric
     df['tsco_liquidity_premium'] = df['tsco_liquidity_ratio'] / (df['tsco_volume_vol'] + 1e-10)  # Avoid division by zero
     df['bp_liquidity_premium'] = df['bp_liquidity_ratio'] / (df['bp_volume_vol'] + 1e-10)
     
@@ -107,7 +107,7 @@ def simulate_risk_scores(df):
     In production, this would:
     1. Load trained RandomForest model from disk
     2. Generate probability scores using model.predict_proba()
-    3. Validate with AUC-ROC > 0.85 (Bloomberg threshold)
+    3. Validate with AUC-ROC > 0.85
     
     For this demo, simulates realistic risk scores based on:
     - Base risk level (30% = normal market conditions)
@@ -155,9 +155,9 @@ def run_risk_analysis():
     """Execute complete risk analysis pipeline
     
     Returns:
-        pandas.DataFrame: Analyzed data with risk scores
+        pandas.DataFrame: Analysed data with risk scores
     """
-    print(color_text("\n[PHASE 2] ANALYZING LIQUIDITY CONDITIONS", 'blue'))
+    print(color_text("\n[PHASE 2] ANALYSING LIQUIDITY CONDITIONS", 'blue'))
     
     # Load features
     df = load_features()
@@ -172,7 +172,7 @@ def run_risk_analysis():
     df = simulate_risk_scores(df)
     
     # Report analysis statistics
-    print(color_text(f"  • Analyzed {len(df)} trading days of liquidity data", 'green'))
+    print(color_text(f"  • Analysed {len(df)} trading days of liquidity data", 'green'))
     print(color_text(f"  • Detected {df['liquidity_crisis'].sum()} historical crisis events", 'green'))
     
     return df
