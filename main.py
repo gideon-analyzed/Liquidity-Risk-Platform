@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BLOOMBERG LIQUIDITY RISK TESTER - MAIN ENTRY POINT
+LIQUIDITY RISK TESTER - MAIN ENTRY POINT
 --------------------------------
 Run this script to see real-time liquidity risk analysis with actual market data
 Shows RED/AMBER/GREEN alerts with actionable trading recommendations
@@ -30,27 +30,27 @@ import config
 def main():
     """Main execution flow of the liquidity risk tester
     
-    Follows Bloomberg's standard risk platform workflow:
+    Follows standard risk platform workflow:
     1. Data Ingestion & Feature Engineering (Phase 1)
     2. Risk Analysis & Model Inference (Phase 2)
     3. Decision Engine & Alerting (Phase 3)
-    4. Dashboard Visualization (Optional)
+    4. Dashboard Visualisation (Optional)
     
     In TEST_MODE, it also simulates real-time monitoring
     with changing market conditions to demonstrate the
     alerting system in action.
     """
-    # Print professional Bloomberg-style banner
+    # Print professional banner
     print_banner()
     
     # PHASE 1: Data & SQL
     # Fetch market data and calculate liquidity metrics
-    print("Initializing data pipeline...")
+    print("Initialising data pipeline...")
     raw_data = fetch_market_data()
     processed_data = store_and_engineer_features(raw_data)
     
     # PHASE 2: Risk Analysis
-    # Analyze liquidity conditions and simulate risk scores
+    # Analyse liquidity conditions and simulate risk scores
     print("Running risk analysis...")
     df = run_risk_analysis()
     
@@ -59,7 +59,7 @@ def main():
     risk_prob = latest['simulated_risk']
     
     # PHASE 3: Decision Engine
-    # Generate and display Bloomberg-style alert
+    # Generate and display alert
     print("\n[PHASE 3] GENERATING LIQUIDITY RECOMMENDATION")
     recommendation = get_recommendation(risk_prob)
     display_recommendation(recommendation)
@@ -94,7 +94,7 @@ def main():
         except KeyboardInterrupt:
             # Graceful exit on Ctrl+C
             print("\n" + "="*60)
-            print("Monitoring stopped. Exiting Bloomberg Liquidity Risk Platform.")
+            print("Monitoring stopped. Exiting Liquidity Risk Platform.")
             print("="*60 + "\n")
             sys.exit(0)
 
