@@ -1,7 +1,7 @@
 """
 Data Engine Module - Phase 1
 Handles market data fetching, alignment, and SQL-based feature engineering
-Implements Bloomberg's standard approach to liquidity metric calculation
+Implements standard approach to liquidity metric calculation
 """
 
 import yfinance as yf
@@ -38,7 +38,7 @@ def fetch_market_data():
     print(f"  • Downloading FTSE 100 ({config.SECURITIES['ftse100']}) data")
     ftse = yf.download(config.SECURITIES['ftse100'], start=start_date, end=end_date, progress=False)
     
-    # Align data across different assets (Bloomberg standard practice)
+    # Align data across different assets
     # Handles different holiday schedules between LSE and other markets
     df = pd.DataFrame(index=tesco.index)
     df['tsco_volume'] = tesco['Volume']  # TESCO volume
@@ -54,19 +54,18 @@ def fetch_market_data():
 
 
 def store_and_engineer_features(df):
-    """Store raw data and engineer Bloomberg-style liquidity features using SQL
+    """Store raw data and engineer liquidity features using SQL
     
-    This function implements Bloomberg's production approach of calculating
-    features directly in SQL using window functions for:
+    This function implements calculating features directly in SQL using window functions for:
     - Auditability
     - Performance at scale
     - Consistency between development and production
     
-    BLOOMBERG METHODOLOGY:
+    METHODOLOGY:
     - 30-day rolling windows (29 preceding + current day)
     - NULLIF() prevents division by zero during market holidays
     - 70/30 weighting: 70% liquidity ratio, 30% volatility change
-    - Crisis threshold: liquidity ratio < 0.4 (Bloomberg standard)
+    - Crisis threshold: liquidity ratio < 0.4 
     
     Args:
         df (pandas.DataFrame): Raw market data
@@ -79,7 +78,7 @@ def store_and_engineer_features(df):
     # Store raw market data
     df.to_sql('stocks', conn, if_exists='replace', index=False)
     
-    # SQL for Bloomberg-style liquidity features using window functions
+    # SQL for liquidity features using window functions
     sql = f"""
     DROP TABLE IF EXISTS liquidity_features;
     CREATE TABLE liquidity_features AS
@@ -88,14 +87,14 @@ def store_and_engineer_features(df):
         tsco_volume,
         bp_volume,
         ftse100_close,
-        -- 30-day rolling average volume (Bloomberg standard window)
+        -- 30-day rolling average volume
         AVG(tsco_volume) OVER (ORDER BY date ROWS BETWEEN {config.ROLLING_WINDOW_DAYS-1} PRECEDING AND CURRENT ROW) AS tsco_30d_avg_volume,
         AVG(bp_volume) OVER (ORDER BY date ROWS BETWEEN {config.ROLLING_WINDOW_DAYS-1} PRECEDING AND CURRENT ROW) AS bp_30d_avg_volume,
-        -- Liquidity ratio: current volume / 30d avg (Bloomberg standard metric)
+        -- Liquidity ratio: current volume / 30d avg
         -- NULLIF prevents division by zero (critical for production)
         tsco_volume * 1.0 / NULLIF(AVG(tsco_volume) OVER (ORDER BY date ROWS BETWEEN {config.ROLLING_WINDOW_DAYS-1} PRECEDING AND CURRENT ROW), 0) AS tsco_liquidity_ratio,
         bp_volume * 1.0 / NULLIF(AVG(bp_volume) OVER (ORDER BY date ROWS BETWEEN {config.ROLLING_WINDOW_DAYS-1} PRECEDING AND CURRENT ROW), 0) AS bp_liquidity_ratio,
-        -- Bloomberg risk score formula (70/30 weighting)
+        -- Risk score formula (70/30 weighting)
         -- 70% = liquidity ratio component
         -- 30% = volatility change component
         (tsco_volume * 1.0 / NULLIF(AVG(tsco_volume) OVER (ORDER BY date ROWS BETWEEN {config.ROLLING_WINDOW_DAYS-1} PRECEDING AND CURRENT ROW), 0) * 0.7 +
