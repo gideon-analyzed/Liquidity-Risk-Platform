@@ -47,8 +47,9 @@ def fetch_market_data():
     df = df.dropna()  # Remove days with missing data (market holidays)
     
     # Reset index for database storage
-    df = df.reset_index().rename(columns={'index': 'date'})
-    df['date'] = df['date'].dt.strftime('%Y-%m-%d')  # Format as ISO date (SQLite friendly)
+    df = df.reset_index()
+    df = df.rename(columns={df.columns[0]: 'date'})  # yfinance calls it 'Date', not 'index'
+    df['date'] = pd.to_datetime(df['date']).dt.strftime('%Y-%m-%d')  # Format as ISO date (SQLite friendly)
     
     return df
 
