@@ -57,7 +57,7 @@ def get_recommendation(risk_probability, security="BP.L/TSCO.L"):
         "action": action,
         "color": color,
         # Code format for quick recognition in trading workflows
-        "Code": f"LIQ_RISK {risk_level} {risk_probability:.0%}"
+        "code": f"LIQ_RISK {risk_level} {risk_probability:.0%}"
     }
     
     return result
