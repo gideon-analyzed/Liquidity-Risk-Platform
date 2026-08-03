@@ -38,9 +38,10 @@ def label_historical_crises(df):
     # In TEST_MODE, add simulated recent volatility for demo purposes
     if config.TEST_MODE:
         recent_dates = pd.date_range(end=datetime.now(), periods=30).strftime('%Y-%m-%d')
-        df.loc[df['date'].isin(recent_dates), 'liquidity_crisis'] = np.random.choice(
-            [0, 1], 
-            size=len(recent_dates), 
+        recent_mask = df['date'].isin(recent_dates)
+        df.loc[recent_mask, 'liquidity_crisis'] = np.random.choice(
+            [0, 1],
+            size=int(recent_mask.sum()),   # number of MATCHED trading days, not 30
             p=[0.7, 0.3]
         )
     
@@ -127,8 +128,8 @@ def simulate_risk_scores(df):
         # Recent volatility spikes (for demo realism)
         recent_mask = df['date'] > '2023-09-01'
         df.loc[recent_mask, 'simulated_risk'] = np.random.uniform(
-            0.6, 
-            0.9, 
+            0.1, 
+            0.4, 
             size=recent_mask.sum()
         )
         
